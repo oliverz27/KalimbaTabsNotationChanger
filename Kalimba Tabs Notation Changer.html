@@ -1,0 +1,309 @@
+<!--
+  Title: Kalimba Tabs Notation Changer v1.0
+  Version: 1.0
+  Date: April 24, 2021
+  Author: Oliver Padolina a5e4e5851577275ccae64c610c5a0bce
+  
+  Description: This tool will help to convert Kalimba Tabs from Letter to Number and vice versa.
+  
+  Features:
+    1. Automatic conversion from letter or number
+    2. Speech will be triggered after converting tabs
+    3. It will show error once letter and number are
+       detected at the same time.
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalimba Tabs Notation Changer v1.0</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+    }
+    .center {
+      text-align: center;
+      margin: auto;
+      width: 50%;
+    }
+    textarea {
+      width: 80%;
+      font-size: 24px;
+    }
+    .button {
+      background-color: #0066CC; /* BLUE */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      margin: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    
+    .disabled {
+      background-color: #C0C0C0 /* GRAY */
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    
+    /* Use a media query to add a breakpoint at 800px: */
+    @media screen and (max-width: 800px) {
+      .center {
+        width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+      }
+    }
+  </style>
+</head>
+<body class="center">
+  <h1>Kalimba Tabs Notation Changer v1.0</h1>
+  <hr>
+  <form id="mainForm">
+    <p>Numbered/Lettered Tabs</p>
+    <textarea id="keyInputText" rows="10" ></textarea>
+    </br>
+    <button class="button" id="convertButton">AUTO CONVERT >></button>
+    </br>
+    <p>Converted Tabs</p>
+    <textarea id="keyOutputText" rows="10" ></textarea>
+  </form>
+  <p id="adsText">ADS: ON</p>
+  <label class="switch">
+    <input id="adsSwitch" type="checkbox" checked>
+    <span class="slider round"></span>
+  </label>
+  </br>
+  </br>
+  <hr>
+  <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina">Oliver Padolina</a>. All Rights Reserved.</p>
+  <p>Please subscribe if you find this tool helpful. Thank you!</p>
+  <script>
+    var keyInputText = document.getElementById('keyInputText')
+    var convertButton = document.getElementById('convertButton')
+    var keyOutputText = document.getElementById('keyOutputText')
+    var adsSwitch = document.getElementById('adsSwitch')
+    var adsText = document.getElementById('adsText')
+    
+    var output = "";
+    var adsStatus = true;
+    
+    keyInputText.focus();
+    
+    convertButton.onclick = function(event) {
+      event.preventDefault();
+      
+      disableEvents();
+      
+      convertKey(keyInputText.value);
+    }
+    
+    adsSwitch.onclick = function(event) {
+      if (adsSwitch.checked) {
+        adsStatus = true;
+        adsText.innerHTML  = "ADS: ON";
+      } else {
+        adsStatus = false;
+        adsText.innerHTML  = "ADS: OFF";
+      }
+    }
+    
+    function convertKey(text) {
+      // Error 1
+      if (text == "") {
+        keyInputText.focus();
+        alert("Tabs must not be empty!");
+        return;
+      }
+      
+      // Clear Vars
+      keyOutputText.value = "";
+      output = "";
+      
+      // To Uppercase
+      text = text.toUpperCase();
+      keyInputText.value = text;
+      
+      var isLetter = false;
+      var isNumber = false;
+      
+      // Decision
+      for (var i = 0; i < text.length; i++) {
+        var curText = text.charAt(i);
+        
+        if (curText == 1) {
+          curText = 'C';
+          isNumber = true;
+        }
+        else if (curText == 2) {
+          curText = 'D';
+          isNumber = true;
+        }   
+        else if (curText == 3) {
+          curText = 'E';
+          isNumber = true;
+        } 
+        else if (curText == 4) {
+          curText = 'F';
+          isNumber = true;
+        } 
+        else if (curText == 5) {
+          curText = 'G';
+          isNumber = true;
+        } 
+        else if (curText == 6) {
+          curText = 'A';
+          isNumber = true;
+        } 
+        else if (curText == 7) {
+          curText = 'B';
+          isNumber = true;
+        }
+        else if (curText == 'C') {
+          curText = 1;
+          isLetter = true;
+        }   
+        else if (curText == 'D') {
+          curText = 2;
+          isLetter = true;
+        } 
+        else if (curText == 'E') {
+          curText = 3;
+          isLetter = true;
+        } 
+        else if (curText == 'F') {
+          curText = 4;
+          isLetter = true;
+        } 
+        else if (curText == 'G') {
+          curText = 5;
+          isLetter = true;
+        } 
+        else if (curText == 'A') {
+          curText = 6;
+          isLetter = true;
+        }
+        else if (curText == 'B') {
+          curText = 7;
+          isLetter = true;
+        }
+        output = output + curText;
+      }
+      // Error 2
+      if (isLetter && isNumber) {
+        alert("Tabs must be on Numbered or Lettered Notation only!");
+        return;
+      }
+      
+      keyOutputText.value = output;
+      
+      if (adsStatus) {
+        customMessage();
+      } else {
+        enableEvents();
+      }
+    }
+    
+    function copyTextToClipboard(text) {
+      keyOutputText.select();
+      keyOutputText.setSelectionRange(0, 99999); /* For mobile devices */
+      document.execCommand('copy');
+    }
+    
+    function customMessage() {
+      let speech = new SpeechSynthesisUtterance();
+
+      speech.lang = "en-US";
+      speech.text = "If you like this tool. Please subscribe to oh,liver pado,lina. Thank you, and Stay safe!";
+      speech.volume = 1;
+      speech.rate = 1;
+      speech.pitch = 1;                
+
+      window.speechSynthesis.speak(speech);
+      speech.onend = function() {
+        enableEvents()
+      }
+    }
+    
+    function disableEvents() {
+      convertButton.disabled = true;
+      convertButton.classList.add("disabled");
+      keyInputText.disabled = true;
+      keyOutputText.disabled = true;
+    }
+    
+    function enableEvents() {
+      convertButton.disabled = false;
+      convertButton.classList.remove("disabled");
+      keyInputText.disabled = false;
+      keyOutputText.disabled = false;
+      
+      alert("Tabs is successfully converted and copied to your clipboard! Enjoy!");
+      
+      copyTextToClipboard()
+    }
+    
+    
+  </script>
+</body>
+</html>

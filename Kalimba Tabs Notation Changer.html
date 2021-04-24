@@ -1,6 +1,6 @@
 <!--
-  Title: Kalimba Tabs Notation Changer v1.0
-  Version: 1.0
+  Title: Kalimba Tabs Notation Changer v1.1
+  Version: 1.1
   Date: April 24, 2021
   Author: Oliver Padolina a5e4e5851577275ccae64c610c5a0bce
   
@@ -8,8 +8,7 @@
   
   Features:
     1. Automatic conversion from letter or number
-    2. Speech will be triggered after converting tabs
-    3. It will show error once letter and number are
+    2. It will show error once letter and number are
        detected at the same time.
 -->
 <!doctype html>
@@ -18,161 +17,163 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalimba Tabs Notation Changer v1.0</title>
+  <title>Kalimba Tabs Notation Changer v1.1</title>
   <style>
-    body {
+    html {
       font-family: Verdana, sans-serif;
+      font-size: 15px;
     }
-    .center {
-      text-align: center;
+    body {
       margin: auto;
       width: 50%;
     }
-    textarea {
-      width: 80%;
-      font-size: 24px;
+    
+    .main {
+      padding: 16px;
     }
+    
+    h1 {
+      font-size: 42px;
+    }
+    
+    h2 {
+      font-size: 32px;
+    }
+    
+    h3 {
+      font-size: 24px;
+    } 
+    
+    h1, h2, h3 {
+      font-weight: 400;
+      margin: 10px 0;
+    }
+    
+    hr {
+      border: 0;
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+    
+    .box {
+      padding: 8px 24px;
+      margin: 24px 0;
+      background-color: #F5F5F5;
+      border-radius: 5px;
+    }
+    
+    textarea {
+      width: 100%;
+      font-size: 16px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    
     .button {
       background-color: #0066CC; /* BLUE */
       border: none;
-      color: white;
-      padding: 15px 32px;
-      margin: 10px;
-      text-align: center;
+      border-radius: 5px;
+      display: inline-block;
+      padding: 8px 16px;
+      margin: 8px;
+      vertical-align: middle;
+      overflow: hidden;
       text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-    }
-    
-    .disabled {
-      background-color: #C0C0C0 /* GRAY */
-    }
-    
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-
-    .switch input { 
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
+      color: white;
+      text-align: center;
       cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      -webkit-transition: .4s;
-      transition: .4s;
+      white-space: nowrap;
+      font-size: 17px;
     }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
+    
+    .red {
+      background-color: #FF0000; /* RED */
     }
-
-    input:checked + .slider {
-      background-color: #2196F3;
+    
+    .green {
+      background-color: #04AA6D; /* GREEN */
     }
-
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
+    
+    ul {
+      text-align: left;
+      padding-right: 10px;
     }
-
-    input:checked + .slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
+    
+    .footer {
+      text-align: center;
     }
     
     /* Use a media query to add a breakpoint at 800px: */
     @media screen and (max-width: 800px) {
-      .center {
+      body {
         width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+      }
+      h1 {
+        font-size: 30px;
+      }
+      h2 {
+        font-size: 25px;
       }
     }
   </style>
 </head>
-<body class="center">
-  <h1>Kalimba Tabs Notation Changer v1.0</h1>
-  <hr>
-  <form id="mainForm">
-    <p>Numbered/Lettered Tabs</p>
-    <textarea id="keyInputText" rows="10" ></textarea>
-    </br>
-    <button class="button" id="convertButton">AUTO CONVERT >></button>
-    </br>
-    <p>Converted Tabs</p>
-    <textarea id="keyOutputText" rows="10" ></textarea>
-  </form>
-  <p id="adsText">ADS: ON</p>
-  <label class="switch">
-    <input id="adsSwitch" type="checkbox" checked>
-    <span class="slider round"></span>
-  </label>
-  </br>
-  </br>
-  <hr>
-  <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina">Oliver Padolina</a>. All Rights Reserved.</p>
-  <p>Please subscribe if you find this tool helpful. Thank you!</p>
+  
+<body>
+  <div class="main">
+    <h1>Kalimba Tabs Notation Changer v1.1</h1>
+    <hr>
+    <a href="https://youtu.be/YxJ2A1Ko_Rk"><button class="button green">How to use</button></a>
+    <hr>
+    
+    <div class="box">
+      <h3>Numbered/Lettered Tabs</h3>
+      <textarea id="keyInputText" rows="10" placeholder="Enter your tabs here in Lettered or Numbered Notation..."></textarea>
+      
+      <button class="button" id="convertButton">Auto Convert »</button>
+    </div>
+    
+    <hr>
+    
+    <div class="box">
+      <h3>Converted Tabs</h3>
+      <textarea id="keyOutputText" rows="10" placeholder="Converted Tabs will be shown here..."></textarea>
+    </div>
+
+    <hr>
+    
+    <h2>More Tabs & Tutorials</h2>
+    <ul>
+      <li><a href="https://youtu.be/yixU3k8fe7Q">Stereo Hearts - Gym Class Heroes | Kalimba Cover Tutorial | Easy Tabs With Lyrics</a></li>
+      <li><a href="https://youtu.be/vsZSHoaN3vA">How To Connect Kalimba Pickup To Phone | Kalimba Audio Tutorial</a></li>
+    </ul>
+    
+    <hr>
+    
+    <div class="footer">
+      <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina"><button class="button red">Oliver Padolina</button></a>. All Rights Reserved.</p>
+      <p>Please subscribe if you find this tool helpful. Thank you!</p>
+    </div>
+  </div>
   <script>
     var keyInputText = document.getElementById('keyInputText')
     var convertButton = document.getElementById('convertButton')
     var keyOutputText = document.getElementById('keyOutputText')
-    var adsSwitch = document.getElementById('adsSwitch')
-    var adsText = document.getElementById('adsText')
-    
+ 
     var output = "";
-    var adsStatus = true;
+    var isFirstTime = true;
     
     keyInputText.focus();
     
     convertButton.onclick = function(event) {
       event.preventDefault();
-      
-      disableEvents();
-      
       convertKey(keyInputText.value);
-    }
-    
-    adsSwitch.onclick = function(event) {
-      if (adsSwitch.checked) {
-        adsStatus = true;
-        adsText.innerHTML  = "ADS: ON";
-      } else {
-        adsStatus = false;
-        adsText.innerHTML  = "ADS: OFF";
-      }
     }
     
     function convertKey(text) {
       // Error 1
       if (text == "") {
         keyInputText.focus();
-        alert("Tabs must not be empty!");
+        alert("Your Tabs must not be empty!");
         return;
       }
       
@@ -251,17 +252,17 @@
       }
       // Error 2
       if (isLetter && isNumber) {
-        alert("Tabs must be on Numbered or Lettered Notation only!");
+        alert("Your Tabs must be on Numbered or Lettered Notation only!");
         return;
       }
       
       keyOutputText.value = output;
-      
-      if (adsStatus) {
-        customMessage();
-      } else {
-        enableEvents();
+      if (isFirstTime) {
+        isFirstTime = false;
+        alert("Your Tabs is successfully converted and copied to your clipboard! Enjoy!");
       }
+      copyTextToClipboard()
+      keyOutputText.focus();
     }
     
     function copyTextToClipboard(text) {
@@ -269,41 +270,6 @@
       keyOutputText.setSelectionRange(0, 99999); /* For mobile devices */
       document.execCommand('copy');
     }
-    
-    function customMessage() {
-      let speech = new SpeechSynthesisUtterance();
-
-      speech.lang = "en-US";
-      speech.text = "If you like this tool. Please subscribe to oh,liver pado,lina. Thank you, and Stay safe!";
-      speech.volume = 1;
-      speech.rate = 1;
-      speech.pitch = 1;                
-
-      window.speechSynthesis.speak(speech);
-      speech.onend = function() {
-        enableEvents()
-      }
-    }
-    
-    function disableEvents() {
-      convertButton.disabled = true;
-      convertButton.classList.add("disabled");
-      keyInputText.disabled = true;
-      keyOutputText.disabled = true;
-    }
-    
-    function enableEvents() {
-      convertButton.disabled = false;
-      convertButton.classList.remove("disabled");
-      keyInputText.disabled = false;
-      keyOutputText.disabled = false;
-      
-      alert("Tabs is successfully converted and copied to your clipboard! Enjoy!");
-      
-      copyTextToClipboard()
-    }
-    
-    
   </script>
 </body>
 </html>

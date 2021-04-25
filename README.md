@@ -12,5 +12,5 @@ Features:
 If you like my work, you can help me by subscribing: https://youtube.com/c/OliverPadolina
 Thank you!
 
-Version: 1.1 Date: April 24, 2021 Author: Oliver Padolina
+Version: 1.2 Date: April 25, 2021 Author: Oliver Padolina
 

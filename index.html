@@ -1,0 +1,280 @@
+<!--
+  Title: Kalimba Tabs Notation Changer v1.2
+  Version: 1.2
+  Date: April 25, 2021
+  Author: Oliver Padolina a5e4e5851577275ccae64c610c5a0bce
+  
+  Description: This tool will help to convert Kalimba Tabs from Letter to Number and vice versa.
+  
+  Features:
+    1. Automatic conversion from letter or number
+    2. It will show error once letter and number are
+       detected at the same time.
+ 
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalimba Tabs Notation Changer v1.2</title>
+  <style>
+    html {
+      font-family: Verdana, sans-serif;
+      font-size: 15px;
+    }
+    body {
+      margin: auto;
+      width: 50%;
+    }
+    
+    .main {
+      padding: 16px;
+    }
+    
+    h1 {
+      font-size: 42px;
+    }
+    
+    h2 {
+      font-size: 32px;
+    }
+    
+    h3 {
+      font-size: 24px;
+    } 
+    
+    h1, h2, h3 {
+      font-weight: 400;
+      margin: 10px 0;
+    }
+    
+    hr {
+      border: 0;
+      border-top: 1px solid #eee;
+      margin: 20px 0;
+    }
+    
+    .box {
+      padding: 8px 24px;
+      margin: 24px 0;
+      background-color: #F5F5F5;
+      border-radius: 5px;
+    }
+    
+    textarea {
+      width: 100%;
+      font-size: 16px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .button {
+      background-color: #0066CC; /* BLUE */
+      border: none;
+      border-radius: 5px;
+      display: inline-block;
+      padding: 8px 16px;
+      margin: 8px;
+      vertical-align: middle;
+      overflow: hidden;
+      text-decoration: none;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: 17px;
+    }
+    
+    .red {
+      background-color: #FF0000; /* RED */
+    }
+    
+    .green {
+      background-color: #04AA6D; /* GREEN */
+    }
+    
+    ul {
+      text-align: left;
+      padding-right: 10px;
+    }
+    
+    .footer {
+      text-align: center;
+    }
+    
+    /* Use a media query to add a breakpoint at 800px: */
+    @media screen and (max-width: 800px) {
+      body {
+        width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+      }
+      h1 {
+        font-size: 30px;
+      }
+      h2 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+  
+<body>
+  <div class="main">
+    <h1>Kalimba Tabs Notation Changer v1.2</h1>
+    <hr>
+    <a href="https://youtu.be/YxJ2A1Ko_Rk"><button class="button green">How to use »</button></a>
+    <hr>
+    
+    <div class="box">
+      <h3>Numbered/Lettered Tabs</h3>
+      <textarea id="keyInputText" rows="10" placeholder="Enter your tabs here in Lettered or Numbered Notation..."></textarea>
+      
+      <button class="button" id="convertButton">Auto Convert »</button>
+    </div>
+    
+    <hr>
+    
+    <div class="box">
+      <h3>Converted Tabs</h3>
+      <textarea id="keyOutputText" rows="10" placeholder="Converted Tabs will be shown here..."></textarea>
+    </div>
+
+    <hr>
+    
+    <h2>More Tabs & Tutorials</h2>
+    <ul>
+      <li><a href="https://youtu.be/yixU3k8fe7Q">Stereo Hearts - Gym Class Heroes | Kalimba Cover Tutorial | Easy Tabs With Lyrics</a></li>
+      <li><a href="https://youtu.be/vsZSHoaN3vA">How To Connect Kalimba Pickup To Phone | Kalimba Audio Tutorial</a></li>
+    </ul>
+    
+    <hr>
+    
+    <div class="footer">
+      <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina"><button class="button red">Oliver Padolina »</button></a>. All Rights Reserved.</p>
+      <p>Please subscribe if you find this tool helpful. Thank you!</p>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(event) {
+      var keyInputText = document.getElementById('keyInputText')
+      var keyOutputText = document.getElementById('keyOutputText')
+   
+      var output = "";
+      var isFirstTime = true;
+      
+      keyInputText.focus();
+      
+      const main = document.querySelector(".main");
+      main.addEventListener("click", function(event) {
+        const button = event.target.matches("#convertButton");
+        if (button) {
+          convertKey(keyInputText.value);
+        }
+      });
+      
+      function convertKey(text) {
+        // Error 1
+        if (text == "") {
+          keyInputText.focus();
+          alert("Your Tabs must not be empty!");
+          return;
+        }
+        
+        // Clear Vars
+        keyOutputText.value = "";
+        output = "";
+        
+        // To Uppercase
+        text = text.toUpperCase();
+        keyInputText.value = text;
+        
+        var isLetter = false;
+        var isNumber = false;
+        
+        // Decision
+        for (var i = 0; i < text.length; i++) {
+          var curText = text.charAt(i);
+          
+          if (curText == 1) {
+            curText = 'C';
+            isNumber = true;
+          }
+          else if (curText == 2) {
+            curText = 'D';
+            isNumber = true;
+          }   
+          else if (curText == 3) {
+            curText = 'E';
+            isNumber = true;
+          } 
+          else if (curText == 4) {
+            curText = 'F';
+            isNumber = true;
+          } 
+          else if (curText == 5) {
+            curText = 'G';
+            isNumber = true;
+          } 
+          else if (curText == 6) {
+            curText = 'A';
+            isNumber = true;
+          } 
+          else if (curText == 7) {
+            curText = 'B';
+            isNumber = true;
+          }
+          else if (curText == 'C') {
+            curText = 1;
+            isLetter = true;
+          }   
+          else if (curText == 'D') {
+            curText = 2;
+            isLetter = true;
+          } 
+          else if (curText == 'E') {
+            curText = 3;
+            isLetter = true;
+          } 
+          else if (curText == 'F') {
+            curText = 4;
+            isLetter = true;
+          } 
+          else if (curText == 'G') {
+            curText = 5;
+            isLetter = true;
+          } 
+          else if (curText == 'A') {
+            curText = 6;
+            isLetter = true;
+          }
+          else if (curText == 'B') {
+            curText = 7;
+            isLetter = true;
+          }
+          output = output + curText;
+        }
+        // Error 2
+        if (isLetter && isNumber) {
+          alert("Your Tabs must be on Numbered or Lettered Notation only!");
+          return;
+        }
+        
+        keyOutputText.value = output;
+        if (isFirstTime) {
+          isFirstTime = false;
+          alert("Your Tabs is successfully converted and copied to your clipboard! Enjoy!");
+        }
+        copyTextToClipboard()
+        keyOutputText.focus();
+      }
+      
+      function copyTextToClipboard(text) {
+      keyOutputText.select();
+      keyOutputText.setSelectionRange(0, 99999); /* For mobile devices */
+      document.execCommand('copy');
+    }
+    });
+  </script>
+</body>
+</html>

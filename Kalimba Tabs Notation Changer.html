@@ -1,7 +1,7 @@
 <!--
-  Title: Kalimba Tabs Notation Changer v1.1
-  Version: 1.1
-  Date: April 24, 2021
+  Title: Kalimba Tabs Notation Changer v1.2
+  Version: 1.2
+  Date: April 25, 2021
   Author: Oliver Padolina a5e4e5851577275ccae64c610c5a0bce
   
   Description: This tool will help to convert Kalimba Tabs from Letter to Number and vice versa.
@@ -10,6 +10,7 @@
     1. Automatic conversion from letter or number
     2. It will show error once letter and number are
        detected at the same time.
+ 
 -->
 <!doctype html>
 <html lang="en">
@@ -17,7 +18,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalimba Tabs Notation Changer v1.1</title>
+  <title>Kalimba Tabs Notation Changer v1.2</title>
   <style>
     html {
       font-family: Verdana, sans-serif;
@@ -120,9 +121,9 @@
   
 <body>
   <div class="main">
-    <h1>Kalimba Tabs Notation Changer v1.1</h1>
+    <h1>Kalimba Tabs Notation Changer v1.2</h1>
     <hr>
-    <a href="https://youtu.be/YxJ2A1Ko_Rk"><button class="button green">How to use</button></a>
+    <a href="https://youtu.be/YxJ2A1Ko_Rk"><button class="button green">How to use »</button></a>
     <hr>
     
     <div class="box">
@@ -150,126 +151,130 @@
     <hr>
     
     <div class="footer">
-      <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina"><button class="button red">Oliver Padolina</button></a>. All Rights Reserved.</p>
+      <p>Copyright &#169 2021 <a href="https://youtube.com/c/OliverPadolina"><button class="button red">Oliver Padolina »</button></a>. All Rights Reserved.</p>
       <p>Please subscribe if you find this tool helpful. Thank you!</p>
     </div>
   </div>
   <script>
-    var keyInputText = document.getElementById('keyInputText')
-    var convertButton = document.getElementById('convertButton')
-    var keyOutputText = document.getElementById('keyOutputText')
- 
-    var output = "";
-    var isFirstTime = true;
-    
-    keyInputText.focus();
-    
-    convertButton.onclick = function(event) {
-      event.preventDefault();
-      convertKey(keyInputText.value);
-    }
-    
-    function convertKey(text) {
-      // Error 1
-      if (text == "") {
-        keyInputText.focus();
-        alert("Your Tabs must not be empty!");
-        return;
-      }
+    document.addEventListener('DOMContentLoaded', function(event) {
+      var keyInputText = document.getElementById('keyInputText')
+      var keyOutputText = document.getElementById('keyOutputText')
+   
+      var output = "";
+      var isFirstTime = true;
       
-      // Clear Vars
-      keyOutputText.value = "";
-      output = "";
+      keyInputText.focus();
       
-      // To Uppercase
-      text = text.toUpperCase();
-      keyInputText.value = text;
+      const main = document.querySelector(".main");
+      main.addEventListener("click", function(event) {
+        const button = event.target.matches("#convertButton");
+        if (button) {
+          convertKey(keyInputText.value);
+        }
+      });
       
-      var isLetter = false;
-      var isNumber = false;
-      
-      // Decision
-      for (var i = 0; i < text.length; i++) {
-        var curText = text.charAt(i);
+      function convertKey(text) {
+        // Error 1
+        if (text == "") {
+          keyInputText.focus();
+          alert("Your Tabs must not be empty!");
+          return;
+        }
         
-        if (curText == 1) {
-          curText = 'C';
-          isNumber = true;
+        // Clear Vars
+        keyOutputText.value = "";
+        output = "";
+        
+        // To Uppercase
+        text = text.toUpperCase();
+        keyInputText.value = text;
+        
+        var isLetter = false;
+        var isNumber = false;
+        
+        // Decision
+        for (var i = 0; i < text.length; i++) {
+          var curText = text.charAt(i);
+          
+          if (curText == 1) {
+            curText = 'C';
+            isNumber = true;
+          }
+          else if (curText == 2) {
+            curText = 'D';
+            isNumber = true;
+          }   
+          else if (curText == 3) {
+            curText = 'E';
+            isNumber = true;
+          } 
+          else if (curText == 4) {
+            curText = 'F';
+            isNumber = true;
+          } 
+          else if (curText == 5) {
+            curText = 'G';
+            isNumber = true;
+          } 
+          else if (curText == 6) {
+            curText = 'A';
+            isNumber = true;
+          } 
+          else if (curText == 7) {
+            curText = 'B';
+            isNumber = true;
+          }
+          else if (curText == 'C') {
+            curText = 1;
+            isLetter = true;
+          }   
+          else if (curText == 'D') {
+            curText = 2;
+            isLetter = true;
+          } 
+          else if (curText == 'E') {
+            curText = 3;
+            isLetter = true;
+          } 
+          else if (curText == 'F') {
+            curText = 4;
+            isLetter = true;
+          } 
+          else if (curText == 'G') {
+            curText = 5;
+            isLetter = true;
+          } 
+          else if (curText == 'A') {
+            curText = 6;
+            isLetter = true;
+          }
+          else if (curText == 'B') {
+            curText = 7;
+            isLetter = true;
+          }
+          output = output + curText;
         }
-        else if (curText == 2) {
-          curText = 'D';
-          isNumber = true;
-        }   
-        else if (curText == 3) {
-          curText = 'E';
-          isNumber = true;
-        } 
-        else if (curText == 4) {
-          curText = 'F';
-          isNumber = true;
-        } 
-        else if (curText == 5) {
-          curText = 'G';
-          isNumber = true;
-        } 
-        else if (curText == 6) {
-          curText = 'A';
-          isNumber = true;
-        } 
-        else if (curText == 7) {
-          curText = 'B';
-          isNumber = true;
+        // Error 2
+        if (isLetter && isNumber) {
+          alert("Your Tabs must be on Numbered or Lettered Notation only!");
+          return;
         }
-        else if (curText == 'C') {
-          curText = 1;
-          isLetter = true;
-        }   
-        else if (curText == 'D') {
-          curText = 2;
-          isLetter = true;
-        } 
-        else if (curText == 'E') {
-          curText = 3;
-          isLetter = true;
-        } 
-        else if (curText == 'F') {
-          curText = 4;
-          isLetter = true;
-        } 
-        else if (curText == 'G') {
-          curText = 5;
-          isLetter = true;
-        } 
-        else if (curText == 'A') {
-          curText = 6;
-          isLetter = true;
+        
+        keyOutputText.value = output;
+        if (isFirstTime) {
+          isFirstTime = false;
+          alert("Your Tabs is successfully converted and copied to your clipboard! Enjoy!");
         }
-        else if (curText == 'B') {
-          curText = 7;
-          isLetter = true;
-        }
-        output = output + curText;
-      }
-      // Error 2
-      if (isLetter && isNumber) {
-        alert("Your Tabs must be on Numbered or Lettered Notation only!");
-        return;
+        copyTextToClipboard()
+        keyOutputText.focus();
       }
       
-      keyOutputText.value = output;
-      if (isFirstTime) {
-        isFirstTime = false;
-        alert("Your Tabs is successfully converted and copied to your clipboard! Enjoy!");
-      }
-      copyTextToClipboard()
-      keyOutputText.focus();
-    }
-    
-    function copyTextToClipboard(text) {
+      function copyTextToClipboard(text) {
       keyOutputText.select();
       keyOutputText.setSelectionRange(0, 99999); /* For mobile devices */
       document.execCommand('copy');
     }
+    });
   </script>
 </body>
 </html>
